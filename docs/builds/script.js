@@ -1,5 +1,5 @@
 const url = window.location.href;
-if (url === "https://barsik0396.github.io/BarsikCMD/builds") {
+if (url === "https://barsik0396.github.io/BarsikCMD/builds/") { // Скорее всего - проблема в том что GitHub автоматически добавляет /, а у меня не указан /, и получается вечная "загрзука"
     setTimeout(() => {
         window.location.replace("https://barsik0396.github.io/BarsikCMD/build-explorer");
     }, 2000); // 2 секунды
