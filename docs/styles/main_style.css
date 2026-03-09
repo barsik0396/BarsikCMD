@@ -1,0 +1,43 @@
+body {
+    background-color: black;
+}
+h1 {
+    color: white;
+    font-family: monospace;
+}
+h2 {
+    color: white;
+    font-family: monospace;
+}
+h3 {
+    color: white;
+    font-family: 'Segoe UI';
+}
+p {
+    color: white;
+    font-family: 'Segoe UI';
+}
+
+main-title {
+    display: block;
+    color: white;
+    font-family: monospace;
+    font-size: 300%;
+    text-align: center;
+}
+main-menu {
+    display: block;
+    color: wheat;
+    font-family: 'Segoe UI';
+    text-align: center;
+    font-size: 120%;
+}
+a {
+    color: purple;
+}
+nothing {
+    display: block;
+    color: grey;
+    font-family: 'Segoe UI';
+    text-align: center;
+}
