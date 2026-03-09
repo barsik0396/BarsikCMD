@@ -1,0 +1,52 @@
+h1 {
+    display: block;
+    text-align: center;
+}
+h2 {
+    display: block;
+    text-align: center;
+}
+h3 {
+    display: block;
+    text-align: center;
+}
+p {
+    display: block;
+    text-align: center;
+}
+.download {
+    color: royalblue;
+}
+
+.tag-supported {
+    color: white;
+    background-color: green;
+    font-family: monospace;
+    &:hover {
+        color: green;
+        cursor: default;
+        background-color: white;
+    }
+}
+
+.tag-ending {
+    color: white;
+    background-color: orangered;
+    font-family: monospace;
+    &:hover {
+        color: orangered;
+        cursor: default;
+        background-color: white;
+    }
+}
+
+.tag-unsupported {
+    color: white;
+    background-color: red;
+    font-family: monospace;
+    &:hover {
+        color: red;
+        cursor: default;
+        background-color: white;
+    }
+}

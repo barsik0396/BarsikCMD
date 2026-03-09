@@ -1,0 +1,119 @@
+.tag-supported {
+    color: white;
+    background-color: green;
+    font-family: monospace;
+    &:hover {
+        color: green;
+        cursor: default;
+        background-color: white;
+    }
+}
+.tag-ending {
+    color: white;
+    background-color: orangered;
+    font-family: monospace;
+    &:hover {
+        color: orangered;
+        cursor: default;
+        background-color: white;
+    }
+}
+.tag-unsupported {
+    color: white;
+    background-color: red;
+    font-family: monospace;
+    &:hover {
+        color: red;
+        cursor: default;
+        background-color: white;
+    }
+}
+.tag-release {
+    color: black;
+    border: 50%;
+    border-radius: 10%;
+    background-color: rgb(0, 255, 106);
+    font-family: monospace;
+    &:hover {
+        color: rgb(0, 255, 106);
+        cursor: default;
+        background-color: black;
+    }
+}
+.tag-pre-release {
+    color: black;
+    border: 50%;
+    border-radius: 10%;
+    background-color: rgb(208, 255, 0);
+    font-family: monospace;
+    &:hover {
+        color: rgb(208, 255, 0);
+        cursor: default;
+        background-color: black;
+    }
+}
+.tag-latest {
+    color: white;
+    background-color: rgb(0, 102, 255);
+    font-family: monospace;
+    &:hover {
+        color: rgb(0, 102, 255);
+        cursor: default;
+        background-color: white;
+    }
+}/*
+code {
+    display: block;
+    position: relative;
+    translate: 245px 10px;
+    width: 300px;
+    height: 20px;
+    color: white;
+    background-color: rgb(53, 53, 53);
+    border: 1pt;
+    border-radius: 10px;
+    font-family: monospace;
+    &:hover {
+        color: black;
+        background-color: gray;
+        cursor: pointer;
+        border: 0%;
+        border-radius: 5px;
+    }
+    &:active {
+        color: red;
+        background-color: blanchedalmond;
+        cursor: move;
+    }
+}
+
+code2 {
+    display: block;
+    position: relative;
+    translate: 245px 10px;
+    width: 300px;
+    height: 100px;
+    color: white;
+    background-color: rgb(53, 53, 53);
+    border: 1pt;
+    border-radius: 10px;
+    font-family: monospace;
+    &:hover {
+        color: black;
+        background-color: gray;
+        cursor: pointer;
+        border: 0%;
+        border-radius: 5px;
+    }
+    &:active {
+        color: red;
+        background-color: blanchedalmond;
+        cursor: move;
+    }
+}/*
+button {
+    color: white;
+    background-color: #255eb3;
+    border: #FFFFFF;
+    border-radius: 10%;
+}
