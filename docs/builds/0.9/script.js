@@ -35,16 +35,16 @@ if (url === "https://barsik0396.github.io/BarsikCMD/builds/0.9/homepage.html") {
     setTimeout(() => {
         window.location.replace("http://127.0.0.1:3000/docs/about.html");
     }, 2000)
-} else if (url === "https://barsik0396.github.io/builds/0.9/downloadpage.html") {
+} else if (url === "https://barsik0396.github.io/BarsikCMD/builds/0.9/downloadpage.html") {
     setTimeout(() => {
-        window.location.replace("https://barsik0396.github.io/download.html");
+        window.location.replace("https://barsik0396.github.io/BarsikCMD/download.html");
     }, 2000)
-} else if (url === "https://barsik0396.github.io/builds/0.9/githubpage.html") {
+} else if (url === "https://barsik0396.github.io/BarsikCMD/builds/0.9/githubpage.html") {
     setTimeout(() => {
         window.location.replace("https://github.com/barsik0396/BarsikCMD");
     }, 2000)
-} else if (url === "https://barsik0396.github.io/builds/0.9/aboutpage.html") {
+} else if (url === "https://barsik0396.github.io/BarsikCMD/builds/0.9/aboutpage.html") {
     setTimeout(() => {
-        window.location.replace("https://barsik0396.github.io/about.html");
+        window.location.replace("https://barsik0396.github.io/BarsikCMD/about.html");
     }, 2000)
 }
