@@ -6,5 +6,6 @@
 # Media-файлы
 media/documentation/node_modules/*
 media/documentation/dist/*
+# Файлы сборки
 code/linux/mint/build/barsik-cmd_2026.3.11.1_amd64/usr/local/bin/BarsikCMD_DOCS/*
 code/linux/mint/build/*.deb
