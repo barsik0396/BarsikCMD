@@ -8,4 +8,5 @@
 # Папка ignore
 #ignore
 # Media-файлы
-#media
+#mediamedia/documentation/node_modules/
+media/documentation/dist/
