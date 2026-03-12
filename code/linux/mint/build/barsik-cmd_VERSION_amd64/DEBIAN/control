@@ -1,0 +1,11 @@
+Package: barsik-cmd
+Version: 2026.3.11
+Architecture: amd64
+Maintainer: Your Name <your@email.com>
+Description: BarsikCMD - CLI utility
+ Longer description here.
+Depends: 
+Recommends: 
+Homepage: https://example.com
+Section: utils
+Priority: optional

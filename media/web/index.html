@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BarsikCMD</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-logo">
+      <span class="logo-icon">🐱</span>
+      <span class="logo-text">BarsikCMD</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">Главная</a>
+      <a href="docs.html" class="nav-link">Документация</a>
+      <a href="updates.html" class="nav-link">Обновления</a>
+      <a href="#" class="nav-link nav-external" id="mainSiteLink" target="_blank">
+        Сайт ↗
+      </a>
+    </div>
+    <button class="nav-burger" id="burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index.html" class="nav-link active">Главная</a>
+    <a href="docs.html" class="nav-link">Документация</a>
+    <a href="updates.html" class="nav-link">Обновления</a>
+    <a href="#" class="nav-link nav-external" id="mainSiteLinkMobile" target="_blank">Сайт ↗</a>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="hero-bg">
+        <div class="grid-lines"></div>
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge">CLI-утилита</div>
+        <h1 class="hero-title">
+          <span class="hero-cat">🐱</span>
+          Barsik<span class="accent">CMD</span>
+        </h1>
+        <p class="hero-subtitle">Мощная командная строка, которая мурлычет,<br>когда всё работает правильно.</p>
+        <div class="hero-terminal">
+          <div class="terminal-header">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+            <span class="terminal-title">terminal</span>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-line">
+              <span class="prompt">$</span>
+              <span class="cmd" id="typedCmd"></span>
+              <span class="cursor" id="cursor">▋</span>
+            </div>
+            <div class="terminal-output" id="termOutput"></div>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <a href="docs.html" class="btn btn-primary">Начать →</a>
+          <a href="updates.html" class="btn btn-secondary">Обновления</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="features-grid">
+        <div class="feature-card" style="--delay: 0s">
+          <div class="feature-icon">⚡</div>
+          <h3>Быстрый</h3>
+          <p>Мгновенный отклик. Никаких лагов, никакого ожидания.</p>
+        </div>
+        <div class="feature-card" style="--delay: 0.1s">
+          <div class="feature-icon">🎯</div>
+          <h3>Точный</h3>
+          <p>Команды работают именно так, как вы ожидаете.</p>
+        </div>
+        <div class="feature-card" style="--delay: 0.2s">
+          <div class="feature-icon">🔧</div>
+          <h3>Гибкий</h3>
+          <p>Настраивается под любой рабочий процесс.</p>
+        </div>
+        <div class="feature-card" style="--delay: 0.3s">
+          <div class="feature-icon">🐱</div>
+          <h3>Дружелюбный</h3>
+          <p>Понятные сообщения об ошибках и подсказки.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span class="footer-logo">🐱 BarsikCMD</span>
+    <span class="footer-note">Локальная документация</span>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

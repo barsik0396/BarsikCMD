@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Документация — BarsikCMD</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-logo">
+      <span class="logo-icon">🐱</span>
+      <span class="logo-text">BarsikCMD</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Главная</a>
+      <a href="docs.html" class="nav-link active">Документация</a>
+      <a href="updates.html" class="nav-link">Обновления</a>
+      <a href="#" class="nav-link nav-external" id="mainSiteLink" target="_blank">Сайт ↗</a>
+    </div>
+    <button class="nav-burger" id="burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index.html" class="nav-link">Главная</a>
+    <a href="docs.html" class="nav-link active">Документация</a>
+    <a href="updates.html" class="nav-link">Обновления</a>
+    <a href="#" class="nav-link nav-external" id="mainSiteLinkMobile" target="_blank">Сайт ↗</a>
+  </div>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar">
+      <nav class="sidebar-nav">
+        <div class="sidebar-section">
+          <div class="sidebar-heading">Начало работы</div>
+          <a href="#intro" class="sidebar-link active">Введение</a>
+          <a href="#install" class="sidebar-link">Установка</a>
+          <a href="#quickstart" class="sidebar-link">Быстрый старт</a>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-heading">Команды</div>
+          <a href="#commands-basic" class="sidebar-link">Основные</a>
+          <a href="#commands-advanced" class="sidebar-link">Расширенные</a>
+          <a href="#flags" class="sidebar-link">Флаги</a>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-heading">Прочее</div>
+          <a href="#config" class="sidebar-link">Конфигурация</a>
+          <a href="#faq" class="sidebar-link">FAQ</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="docs-main">
+      <div class="docs-content">
+
+        <section id="intro" class="doc-section">
+          <h1>Документация <span class="accent">BarsikCMD</span></h1>
+          <p class="doc-lead">BarsikCMD — это CLI-утилита, которая помогает вам делать то, что нужно, быстро и без лишних движений.</p>
+          <div class="doc-notice">
+            📖 Это локальная документация. Актуальная версия будет доступна на основном сайте.
+          </div>
+        </section>
+
+        <section id="install" class="doc-section">
+          <h2>Установка</h2>
+          <p>Добавьте здесь инструкции по установке BarsikCMD.</p>
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" data-target="install-code">Копировать</button>
+            </div>
+            <pre id="install-code"># Пример команды установки
+barsik install</pre>
+          </div>
+        </section>
+
+        <section id="quickstart" class="doc-section">
+          <h2>Быстрый старт</h2>
+          <p>После установки вы можете сразу начать работу:</p>
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" data-target="qs-code">Копировать</button>
+            </div>
+            <pre id="qs-code">barsik --help</pre>
+          </div>
+        </section>
+
+        <section id="commands-basic" class="doc-section">
+          <h2>Основные команды</h2>
+          <p>Заполните этот раздел командами BarsikCMD.</p>
+          <div class="commands-table">
+            <div class="cmd-row">
+              <div class="cmd-name"><code>barsik help</code></div>
+              <div class="cmd-desc">Показать справку</div>
+            </div>
+            <div class="cmd-row">
+              <div class="cmd-name"><code>barsik version</code></div>
+              <div class="cmd-desc">Показать версию</div>
+            </div>
+            <div class="cmd-row">
+              <div class="cmd-name"><code>barsik run</code></div>
+              <div class="cmd-desc">Запустить утилиту</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="commands-advanced" class="doc-section">
+          <h2>Расширенные команды</h2>
+          <p>Расширенные команды для опытных пользователей. Заполните по мере необходимости.</p>
+        </section>
+
+        <section id="flags" class="doc-section">
+          <h2>Флаги</h2>
+          <div class="commands-table">
+            <div class="cmd-row">
+              <div class="cmd-name"><code>--help</code></div>
+              <div class="cmd-desc">Показать справку</div>
+            </div>
+            <div class="cmd-row">
+              <div class="cmd-name"><code>--version</code></div>
+              <div class="cmd-desc">Показать версию</div>
+            </div>
+            <div class="cmd-row">
+              <div class="cmd-name"><code>--verbose</code></div>
+              <div class="cmd-desc">Подробный вывод</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="config" class="doc-section">
+          <h2>Конфигурация</h2>
+          <p>Опишите здесь параметры конфигурации BarsikCMD.</p>
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">json</span>
+              <button class="copy-btn" data-target="cfg-code">Копировать</button>
+            </div>
+            <pre id="cfg-code">{
+  "option": "value"
+}</pre>
+          </div>
+        </section>
+
+        <section id="faq" class="doc-section">
+          <h2>FAQ</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-q">Где найти актуальную документацию?</div>
+              <div class="faq-a">Актуальная документация будет доступна на основном сайте BarsikCMD.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">Как сообщить об ошибке?</div>
+              <div class="faq-a">Добавьте сюда ссылку на GitHub Issues или другой канал связи.</div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
