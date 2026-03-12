@@ -3,10 +3,8 @@
 # Последнее обновление: 10.03.2026 11:31
 # Создал: barsik0396 (создатель BarsikCMD)
 #
-# Виджет для размера файла
-#file_size_widget.py
-# Папка ignore
-#ignore
 # Media-файлы
 media/documentation/node_modules/*
 media/documentation/dist/*
+code/linux/mint/build/barsik-cmd_2026.3.11.1_amd64/usr/local/bin/BarsikCMD_DOCS/*
+code/linux/mint/build/*.deb
