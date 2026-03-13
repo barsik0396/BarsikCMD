@@ -28,6 +28,7 @@
       <a href="#" class="sidebar-link" onclick="showDocs(event, 'cmd-echo')"><span class="cmd-tag">echo</span></a>
       <a href="#" class="sidebar-link" onclick="showDocs(event, 'cmd-exit')"><span class="cmd-tag">exit</span></a>
       <a href="#" class="sidebar-link" onclick="showDocs(event, 'cmd-help')"><span class="cmd-tag">help</span></a>
+      <a href="#" class="sidebar-link" onclick="showDocs(event, 'cmd-update')"><span class="cmd-tag">update</span></a>
       <a href="#" class="sidebar-link" onclick="showDocs(event, 'cmd-ver')"><span class="cmd-tag">ver</span></a>
     </div>
     <div class="sidebar-bottom">
@@ -48,9 +49,9 @@
         </div>
         <div class="terminal-body">
           <div class="t-line"><span class="t-prompt">BarsikCMD&gt; </span><span class="t-cmd">ver</span></div>
-          <div class="t-line"><span class="t-out">BarsikCMD версия 2026.3.11.1</span></div>
+          <div class="t-line"><span class="t-cyan t-bold">BarsikCMD версия 2026.3.2</span></div>
           <div class="t-line" style="margin-top:10px"><span class="t-prompt">BarsikCMD&gt; </span><span class="t-cmd">echo Привет, Linux!</span></div>
-          <div class="t-line"><span class="t-out">Привет, Linux!</span></div>
+          <div class="t-line"><span class="t-white">Привет, Linux!</span></div>
           <div class="t-line" style="margin-top:10px"><span class="t-prompt">BarsikCMD&gt; </span><span class="t-cursor"></span></div>
         </div>
       </div>
@@ -59,6 +60,7 @@
     <section class="section" id="commands">
       <div class="section-title">Справочник команд</div>
 
+      <!-- clear -->
       <div class="cmd-card" id="cmd-clear">
         <div class="cmd-header" onclick="toggle(this)">
           <span class="cmd-name">clear</span>
@@ -67,7 +69,7 @@
           <span class="chevron">▾</span>
         </div>
         <div class="cmd-body hidden">
-          <p class="cmd-desc">Очищает содержимое терминала. Аналог системного <code>clear</code>, но встроенный прямо в BarsikCMD.</p>
+          <p class="cmd-desc">Очищает содержимое терминала. Встроенный аналог системного <code>clear</code>.</p>
           <div class="cmd-syntax"><span class="kw">clear</span></div>
           <div class="example-block">
             <div class="example-label">Вывод</div>
@@ -79,6 +81,7 @@
         </div>
       </div>
 
+      <!-- echo -->
       <div class="cmd-card" id="cmd-echo">
         <div class="cmd-header" onclick="toggle(this)">
           <span class="cmd-name">echo</span>
@@ -87,7 +90,7 @@
           <span class="chevron">▾</span>
         </div>
         <div class="cmd-body hidden">
-          <p class="cmd-desc">Выводит переданный текст в стандартный вывод. Всё, что написано после <code>echo</code>, будет напечатано как есть.</p>
+          <p class="cmd-desc">Выводит переданный текст в стандартный вывод белым цветом.</p>
           <div class="cmd-syntax"><span class="kw">echo</span> <span class="arg">[текст]</span></div>
           <table class="cmd-table">
             <tr><th>Аргумент</th><th>Описание</th></tr>
@@ -97,7 +100,7 @@
             <div class="example-label">Вывод</div>
             <div class="example-line">
               <span class="p">BarsikCMD&gt; </span>echo Привет, мир!
-              <span class="out">Привет, мир!</span>
+              <span class="out"><span class="t-white">Привет, мир!</span></span>
             </div>
             <div class="example-line">
               <span class="p">BarsikCMD&gt; </span>echo
@@ -107,6 +110,7 @@
         </div>
       </div>
 
+      <!-- exit -->
       <div class="cmd-card" id="cmd-exit">
         <div class="cmd-header" onclick="toggle(this)">
           <span class="cmd-name">exit</span>
@@ -121,12 +125,13 @@
             <div class="example-label">Вывод</div>
             <div class="example-line">
               <span class="p">BarsikCMD&gt; </span>exit
-              <span class="out">Пока!</span>
+              <span class="out"><span class="t-red t-bold">Пока!</span></span>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- help -->
       <div class="cmd-card" id="cmd-help">
         <div class="cmd-header" onclick="toggle(this)">
           <span class="cmd-name">help</span>
@@ -141,12 +146,65 @@
             <div class="example-label">Вывод</div>
             <div class="example-line">
               <span class="p">BarsikCMD&gt; </span>help
-              <span class="out">Доступные команды:<br>&nbsp;&nbsp;clear<br>&nbsp;&nbsp;echo<br>&nbsp;&nbsp;exit<br>&nbsp;&nbsp;help<br>&nbsp;&nbsp;ver</span>
+              <span class="out">
+                <span class="t-yellow t-bold">BarsikCMD — доступные команды:</span><br>
+                <span class="t-cyan">─────────────────────────────────</span><br>
+                &nbsp;&nbsp;<span class="t-green t-bold">clear</span> — очистить экран<br>
+                &nbsp;&nbsp;<span class="t-green t-bold">echo</span> — вывести текст на экран<br>
+                &nbsp;&nbsp;<span class="t-green t-bold">exit</span> — выйти из BarsikCMD<br>
+                &nbsp;&nbsp;<span class="t-green t-bold">help</span> — показать список команд<br>
+                &nbsp;&nbsp;<span class="t-green t-bold">update</span> — проверить и установить обновления<br>
+                &nbsp;&nbsp;<span class="t-green t-bold">ver</span> — показать версию BarsikCMD<br>
+                <span class="t-cyan">─────────────────────────────────</span>
+              </span>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- update -->
+      <div class="cmd-card" id="cmd-update">
+        <div class="cmd-header" onclick="toggle(this)">
+          <span class="cmd-name">update</span>
+          <span class="cmd-badge badge-system">system</span>
+          <span class="cmd-short">Проверить обновления</span>
+          <span class="chevron">▾</span>
+        </div>
+        <div class="cmd-body hidden">
+          <p class="cmd-desc">Проверяет наличие новой версии BarsikCMD через сервер обновлений и устанавливает её при наличии. Требует интернет-соединения и пароля для установки пакета.</p>
+          <div class="cmd-syntax"><span class="kw">update</span></div>
+          <div class="example-block">
+            <div class="example-label">Вывод — обновление доступно</div>
+            <div class="example-line">
+              <span class="p">BarsikCMD&gt; </span>update
+              <span class="out">
+                <span class="t-cyan">Проверка обновлений...</span><br>
+                <span class="t-yellow">Доступна новая версия: <span class="t-bold">2026.4.1</span></span><br>
+                <span class="t-cyan">Скачиваю пакет...</span><br>
+                <span class="t-cyan">Размер пакета: 21 КБ</span><br>
+                <span class="t-cyan">Устанавливаю пакет (потребуется пароль)...</span><br>
+                <span class="t-green t-bold">BarsikCMD успешно обновлён до версии 2026.4.1!</span>
+              </span>
+            </div>
+            <div class="example-label" style="margin-top:12px">Вывод — обновлений нет</div>
+            <div class="example-line">
+              <span class="p">BarsikCMD&gt; </span>update
+              <span class="out"><span class="t-green t-bold">Обновлений нет. У вас актуальная версия (2026.3.2).</span></span>
+            </div>
+            <div class="example-label" style="margin-top:12px">Вывод — ошибка сети</div>
+            <div class="example-line">
+              <span class="p">BarsikCMD&gt; </span>update
+              <span class="out">
+                <span class="t-cyan">Проверка обновлений...</span><br>
+                <span class="t-red">Ошибка: не удалось получить информацию об обновлениях.</span>
+              </span>
+            </div>
+          </div>
+          <div class="info-box"><strong>Канал обновлений:</strong> preview. Пакет скачивается во временную папку <code>/tmp/</code> и устанавливается через <code>pkexec dpkg</code>.</div>
+        </div>
+      </div>
+
+      <!-- ver -->
       <div class="cmd-card" id="cmd-ver">
         <div class="cmd-header" onclick="toggle(this)">
           <span class="cmd-name">ver</span>
@@ -161,7 +219,7 @@
             <div class="example-label">Вывод</div>
             <div class="example-line">
               <span class="p">BarsikCMD&gt; </span>ver
-              <span class="out">BarsikCMD версия 2026.3.11.1</span>
+              <span class="out"><span class="t-cyan t-bold">BarsikCMD версия 2026.3.2</span></span>
             </div>
           </div>
         </div>
@@ -176,7 +234,7 @@
       <div class="about-info">
         <div class="hero-eyebrow">▸ О Программе</div>
         <h1>Barsik<span class="dim">CMD</span></h1>
-        <p class="about-version">Версия 2026.3.11.1</p>
+        <p class="about-version">Версия 2026.3.2</p>
         <p class="hero-desc">Кастомная командная строка для Linux. Быстрая, минималистичная, твоя.</p>
         <div class="about-links">
           <a href="https://github.com/barsik0396/BarsikCMD" class="about-link" target="_blank">
