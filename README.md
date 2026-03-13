@@ -6,7 +6,7 @@
 <!-- выполняется подготовка к первому релизу -->
 
 
-# BarsikCMD - Командная строка Барсика 😼
+# BarsikCMD - Командная строка Барсика на C и C++ 😼
 > [!TIP]
 > Лучше всего изменять и смотреть на проект в VS Code с расширениями [Live Preview](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) и [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme).
 
