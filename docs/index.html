@@ -1,14 +1,299 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BarsikCMD</title>
-    <link rel="stylesheet" href="styles/main_style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BarsikCMD — Командная строка для Linux</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Fira+Code:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(57,211,83,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(57,211,83,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .hero-glow {
+    position: absolute;
+    top: -200px; left: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(57,211,83,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; max-width: 900px; }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: var(--green);
+    border: 1px solid rgba(57,211,83,0.3);
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    background: rgba(57,211,83,0.05);
+    letter-spacing: 0.08em;
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 .name { color: #fff; }
+  .hero h1 .cmd  { color: var(--green2); text-shadow: 0 0 40px rgba(0,255,136,0.3); }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text2);
+    margin: 1.5rem 0 2.5rem;
+    font-weight: 300;
+    font-family: 'Fira Code', monospace;
+  }
+  .hero-sub .comment { color: var(--muted); }
+  .terminal-preview {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    max-width: 680px;
+    margin: 2.5rem 0;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03);
+    overflow: hidden;
+  }
+  .terminal-body { padding: 20px 24px; font-size: 0.85rem; line-height: 1.8; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .hero-content > * { animation: fadeUp 0.6s ease both; }
+  .hero-tag         { animation-delay: 0.1s; }
+  .hero h1          { animation-delay: 0.2s; }
+  .hero-sub         { animation-delay: 0.3s; }
+  .terminal-preview { animation-delay: 0.4s; }
+  .hero-actions     { animation-delay: 0.5s; }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .feature-card {
+    background: var(--bg);
+    padding: 2rem;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-card:hover { background: var(--bg2); }
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .feature-card:hover::before { opacity: 1; }
+  .feature-icon  { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
+  .feature-title { font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem; }
+  .feature-text  { font-size: 0.82rem; color: var(--text2); font-family: 'Fira Code', monospace; line-height: 1.7; }
+
+  .install-steps { display: flex; flex-direction: column; gap: 1.5rem; }
+  .install-step  { display: grid; grid-template-columns: 40px 1fr; gap: 1.5rem; align-items: start; }
+  .step-num {
+    width: 40px; height: 40px;
+    border: 1px solid var(--border2);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; color: var(--green); font-weight: 700; flex-shrink: 0;
+  }
+  .step-content h3 { font-size: 0.9rem; color: #fff; margin-bottom: 0.75rem; font-weight: 500; }
+
+  .demo-wrap {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+  .demo-header {
+    background: var(--bg3);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .demo-run-btn {
+    margin-left: auto;
+    background: rgba(57,211,83,0.1);
+    border: 1px solid rgba(57,211,83,0.3);
+    color: var(--green);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    padding: 4px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .demo-run-btn:hover { background: rgba(57,211,83,0.2); }
+  .demo-body { padding: 24px; font-size: 0.85rem; line-height: 1.9; min-height: 300px; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 100px 1.5rem 3rem; }
+    .install-step { grid-template-columns: 1fr; }
+    .step-num { display: none; }
+  }
+</style>
 </head>
 <body>
-    <script src="js/load.js"></script>
-    <main-title>BarsikCMD</main-title>
-    <main-menu>Главная | <a href="download.html">Скачать</a> | <a href="links/github.html">GitHub</a> | <a href="about.html">О проекте</a></main-menu>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="prompt">~$</span>
+    BarsikCMD
+    <span class="cursor"></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">возможности</a></li>
+    <li><a href="#install">установка</a></li>
+    <li><a href="docs.html">команды</a></li>
+    <li><a href="try.html">попробовать</a></li>
+    <li><a href="https://github.com/barsik0396/BarsikCMD" target="_blank">github</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <span class="hero-tag">// Командная строка для Linux</span>
+    <h1><span class="name">Barsik</span><span class="cmd">CMD</span></h1>
+    <p class="hero-sub">
+      <span class="comment"># </span>Твоя командная строка для Linux.<br>
+      <span class="comment"># </span>Быстро. Просто. По-кошачьи.
+    </p>
+    <div class="terminal-preview">
+      <div class="terminal-header">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+        <span class="terminal-title">BarsikCMD</span>
+      </div>
+      <div class="terminal-body">
+        <div class="t-line t-out"><span class="t-green">BarsikCMD v2026.3.11.1 — введи 'help' для списка команд</span></div>
+        <div class="t-empty"></div>
+        <div class="t-line"><span class="t-prompt">BarsikCMD&gt;</span><span class="t-cmd"> ver</span></div>
+        <div class="t-line t-out"><span class="t-green">BarsikCMD версия 2026.3.12.1</span></div>
+        <div class="t-empty"></div>
+        <div class="t-line"><span class="t-prompt">BarsikCMD&gt;</span><span class="t-cmd"> echo Мяу!</span></div>
+        <div class="t-line t-out"><span class="t-yellow">Мяу!</span></div>
+        <div class="t-empty"></div>
+        <div class="t-line"><span class="t-prompt">BarsikCMD&gt;</span><span class="t-cursor"></span></div>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#install" class="btn btn-primary">$ установить</a>
+      <a href="try.html" class="btn btn-secondary">▶ попробовать</a>
+      <a href="docs.html" class="btn btn-secondary">документация →</a>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<section id="features">
+  <div class="section-label">01 / возможности</div>
+  <h2 class="section-title">Зачем BarsikCMD?</h2>
+  <p class="section-desc">// Всё что нужно в одном инструменте — без лишнего шума.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">⚡</span>
+      <div class="feature-title">Молниеносная скорость</div>
+      <p class="feature-text">Написан с минимальными зависимостями. Запускается мгновенно, не тормозит систему.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🎨</span>
+      <div class="feature-title">Простота</div>
+      <p class="feature-text">Минималистичный вывод без лишнего — всё в стандартном цвете терминала, без перегруза.</p>
+    </div>
+
+
+    <div class="feature-card">
+      <span class="feature-icon">📦</span>
+      <div class="feature-title">Лёгкая установка</div>
+      <p class="feature-text">Один .deb пакет — и готово. Официально поддерживается Linux Mint 22.3.</p>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="install">
+  <div class="section-label">02 / установка</div>
+  <h2 class="section-title">Установка</h2>
+  <p class="section-desc">// Четыре шага — и ты готов к работе.</p>
+  <div class="install-steps">
+    <div class="install-step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Скачать последний релиз</h3>
+        <a href="https://github.com/barsik0396/BarsikCMD/releases/download/2026.3.12/barsik-cmd_2026.3.12.1_amd64.deb" class="btn btn-primary" style="margin-top:0.5rem;display:inline-flex">⬇ скачать .deb</a>
+      </div>
+    </div>
+    <div class="install-step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Открыть пакет и нажать «Установить пакет»</h3>
+        <p style="font-size:0.82rem;color:var(--text2);font-family:'Fira Code',monospace;margin-top:0.4rem">// Откроется менеджер пакетов — нажми кнопку установки.</p>
+      </div>
+    </div>
+    <div class="install-step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Подождать завершения установки</h3>
+        <p style="font-size:0.82rem;color:var(--text2);font-family:'Fira Code',monospace;margin-top:0.4rem">// Занимает несколько секунд.</p>
+      </div>
+    </div>
+    <div class="install-step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h3>Готово — открывай <code class="cmd-tag">barsikcmd</code> и <code class="cmd-tag">barsikcmd-docs</code>!</h3>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:2rem">
+    <p style="font-size:0.8rem;color:var(--text2);font-family:'Fira Code',monospace;">
+      <span style="color:var(--green)">✓</span> Официально поддерживается: Linux Mint 22.3
+    </p>
+  </div>
+</section>
+
+
+<footer>
+  <div>
+    <span class="footer-logo">BarsikCMD</span>
+    <span style="margin-left:1rem">// сделано с 🐱 для Linux Mint</span>
+  </div>
+  <div>
+    <a href="https://github.com/barsik0396/BarsikCMD" target="_blank">github</a>
+    <span style="margin:0 0.75rem;color:var(--border2)">|</span>
+    <span style="color:var(--text3)">MIT License</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
