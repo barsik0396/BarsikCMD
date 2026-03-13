@@ -1,0 +1,33 @@
+{
+    "latest": {
+        "main": "2026.3.12",
+        "preview": "2026.3.2",
+        "dev": "2026.3.2",
+        "canary": "2026.3.2"
+    },
+    "updates": {
+        "2026.3.2": {
+            "min-ver": "0",
+            "downloads": {
+                "MINT": {
+                    "official": true,
+                    "supported": true,
+                    "requirements": null,
+                    "link": "https://github.com/barsik0396/BarsikCMD/releases/download/2026.3.2/barsik-cmd_2026.3.2_amd64.deb"
+                }
+            }
+        },
+        "2026.3.12": {
+            "min-ver": "0",
+            "downloads": {
+                "MINT": {
+                    "official": true,
+                    "supported": true,
+                    "requirements": null,
+                    "link": "https://github.com/barsik0396/BarsikCMD/releases/download/2026.3.12/barsik-cmd_2026.3.12.1_amd64.deb"
+                }
+            }
+        }
+
+    }
+}
