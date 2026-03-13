@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Команды — BarsikCMD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Fira+Code:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .docs-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+    min-height: calc(100vh - 56px);
+    margin-top: 56px;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .docs-sidebar {
+    border-right: 1px solid var(--border);
+    padding: 2.5rem 1.5rem;
+    position: sticky;
+    top: 56px;
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+    background: var(--bg);
+  }
+  .sidebar-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-group { margin-bottom: 1.5rem; }
+  .sidebar-group-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 0.4rem;
+    padding-left: 4px;
+  }
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--text2);
+    text-decoration: none;
+    transition: all 0.15s;
+    cursor: pointer;
+  }
+  .sidebar-link:hover { background: var(--bg2); color: var(--text); }
+  .sidebar-link.active { background: rgba(57,211,83,0.08); color: var(--green); }
+  .sidebar-link .badge { margin-left: auto; }
+
+  /* ─── MAIN CONTENT ─── */
+  .docs-main { padding: 3rem 4rem; max-width: 860px; }
+
+  .docs-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+  .docs-header .section-label { margin-bottom: 0.5rem; }
+  .docs-header h1 { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.75rem; }
+  .docs-header p  { color: var(--text2); font-family: 'Fira Code', monospace; font-size: 0.88rem; }
+
+  /* ─── SEARCH ─── */
+  .docs-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 2.5rem;
+    transition: border-color 0.2s;
+  }
+  .docs-search:focus-within { border-color: var(--green); }
+  .docs-search span { color: var(--muted); font-size: 0.9rem; }
+  .docs-search input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    flex: 1;
+  }
+  .docs-search input::placeholder { color: var(--text3); }
+
+  /* ─── CATEGORY BLOCK ─── */
+  .cmd-category { margin-bottom: 3rem; }
+  .cmd-category-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .cmd-category-title span { color: var(--green); font-size: 1rem; }
+
+  /* ─── COMMAND ROWS ─── */
+  .doc-row {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .doc-row:hover { border-color: var(--border2); }
+  .doc-row-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .doc-row-header:hover { background: var(--bg2); }
+  .doc-cmd { flex: 1; }
+  .doc-short { font-size: 0.8rem; color: var(--text2); font-family: 'Fira Code', monospace; }
+  .doc-arrow {
+    color: var(--text3);
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+  }
+  .doc-row.open .doc-arrow { transform: rotate(90deg); }
+
+  .doc-row-body {
+    display: none;
+    padding: 0 18px 18px;
+    border-top: 1px solid var(--border);
+  }
+  .doc-row.open .doc-row-body { display: block; }
+
+  .doc-detail { margin-top: 14px; }
+  .doc-detail-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 6px;
+  }
+  .doc-detail p {
+    font-size: 0.83rem;
+    color: var(--text2);
+    font-family: 'Fira Code', monospace;
+    line-height: 1.7;
+  }
+
+  .doc-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 14px;
+  }
+
+  .doc-flags { margin-top: 14px; }
+  .flag-row {
+    display: flex;
+    gap: 12px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.8rem;
+    align-items: baseline;
+  }
+  .flag-row:last-child { border-bottom: none; }
+  .flag-name { color: var(--cyan); min-width: 140px; flex-shrink: 0; }
+  .flag-desc { color: var(--text2); font-family: 'Fira Code', monospace; }
+
+  .doc-example {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 0.8rem;
+    margin-top: 6px;
+  }
+  .doc-example .prompt { color: var(--green); margin-right: 8px; }
+  .doc-example .cmd-text { color: var(--text); }
+
+  /* ─── NO RESULTS ─── */
+  .no-results {
+    display: none;
+    text-align: center;
+    padding: 3rem;
+    color: var(--text3);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .docs-layout { grid-template-columns: 1fr; }
+    .docs-sidebar { display: none; }
+    .docs-main { padding: 2rem 1.5rem; }
+    .doc-details-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="prompt">~$</span>
+    BarsikCMD
+    <span class="cursor"></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#features">возможности</a></li>
+    <li><a href="index.html#install">установка</a></li>
+    <li><a href="docs.html" class="active">команды</a></li>
+    <li><a href="try.html">попробовать</a></li>
+    <li><a href="https://github.com/barsik0396/BarsikCMD" target="_blank">github</a></li>
+  </ul>
+</nav>
+
+<div class="docs-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="docs-sidebar">
+    <div class="sidebar-title">Документация</div>
+
+    <div class="sidebar-group">
+      <div class="sidebar-group-label">Инструменты</div>
+      <a class="sidebar-link" onclick="scrollToCategory('tools')">
+        <span class="cmd-badge badge-builtin">tool</span>
+        Встроенные инструменты
+      </a>
+    </div>
+
+    <div class="sidebar-group">
+      <div class="sidebar-group-label">Команды</div>
+      <a class="sidebar-link" onclick="scrollToCategory('commands')">
+        <span class="cmd-badge badge-nav">cmd</span>
+        Встроенные команды
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="docs-main">
+    <div class="docs-header">
+      <div class="section-label">документация</div>
+      <h1>BarsikCMD Docs</h1>
+      <p>// Часть справочника из GitHub. Может быть не актуально — актуальная версия <a href="https://github.com/barsik0396/BarsikCMD/wiki" target="_blank">тут</a>.</p>
+    </div>
+
+    <div class="docs-search">
+      <span>🔍</span>
+      <input type="text" id="search-input" placeholder="Поиск в документации..." oninput="filterCommands(this.value)">
+    </div>
+
+    <div id="no-results" class="no-results">
+      <div style="font-size:2rem;margin-bottom:1rem">🐱</div>
+      Команды не найдены
+    </div>
+
+
+    <!-- TOOLS -->
+    <div class="cmd-category" id="cat-tools">
+      <div class="cmd-category-title">
+        <span>🛠</span> Встроенные инструменты
+        <span class="cmd-badge badge-builtin" style="margin-left:auto">tool</span>
+      </div>
+
+      <div class="doc-row" onclick="toggleRow(this)">
+        <div class="doc-row-header">
+          <code class="cmd-tag">barsikcmd</code>
+          <span class="doc-short">Основной инструмент BarsikCMD</span>
+          <span class="cmd-badge badge-builtin">tool</span>
+          <span class="doc-arrow">▶</span>
+        </div>
+        <div class="doc-row-body">
+          <div class="doc-detail">
+            <div class="doc-detail-label">Описание</div>
+            <p>Это основной инструмент BarsikCMD — он сам. Точка входа для всей командной строки.</p>
+          </div>
+          <div class="doc-detail">
+            <div class="doc-detail-label">Запуск</div>
+            <div class="doc-example"><span class="prompt">$</span><span class="cmd-text">barsikcmd</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-row" onclick="toggleRow(this)">
+        <div class="doc-row-header">
+          <code class="cmd-tag">barsikcmd-docs</code>
+          <span class="doc-short">Локальная документация</span>
+          <span class="cmd-badge badge-builtin">tool</span>
+          <span class="doc-arrow">▶</span>
+        </div>
+        <div class="doc-row-body">
+          <div class="doc-detail">
+            <div class="doc-detail-label">Описание</div>
+            <p>Инструмент для просмотра локальной документации BarsikCMD прямо в терминале.</p>
+          </div>
+          <div class="doc-detail">
+            <div class="doc-detail-label">Запуск</div>
+            <div class="doc-example"><span class="prompt">$</span><span class="cmd-text">barsikcmd-docs</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMMANDS -->
+    <div class="cmd-category" id="cat-commands">
+      <div class="cmd-category-title">
+        <span>💬</span> Встроенные команды
+        <span class="cmd-badge badge-nav" style="margin-left:auto">cmd</span>
+      </div>
+
+      <div class="doc-row" onclick="toggleRow(this)">
+        <div class="doc-row-header">
+          <code class="cmd-tag">clear</code>
+          <span class="doc-short">Очистка экрана</span>
+          <span class="cmd-badge badge-nav">cmd</span>
+          <span class="doc-arrow">▶</span>
+        </div>
+        <div class="doc-row-body">
+          <div class="doc-detail">
+            <div class="doc-detail-label">Использование</div>
+            <div class="doc-example"><span class="prompt">$</span><span class="cmd-text">clear</span></div>
+          </div>
+          <div class="doc-detail">
+            <div class="doc-detail-label">Вывод</div>
+            <p style="color:var(--text3)">отсутствует</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-row" onclick="toggleRow(this)">
+        <div class="doc-row-header">
+          <code class="cmd-tag">echo &lt;текст&gt;</code>
+          <span class="doc-short">Вывод текста в консоль</span>
+          <span class="cmd-badge badge-nav">cmd</span>
+          <span class="doc-arrow">▶</span>
+        </div>
+        <div class="doc-row-body">
+          <div class="doc-details-grid">
+            <div>
+              <div class="doc-detail-label">Использование</div>
+              <div class="doc-example"><span class="prompt">$</span><span class="cmd-text">echo &lt;текст&gt;</span></div>
+            </div>
+            <div>
+              <div class="doc-detail-label">Пример</div>
+              <div class="doc-example"><span class="prompt">$</span><span class="cmd-text">echo Meow</span></div>
+              <div class="doc-example" style="margin-top:4px">Meow</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-row" onclick="toggleRow(this)">
+        <div class="doc-row-header">
+          <code class="cmd-tag">exit</code>
+          <span class="doc-short">Выход из BarsikCMD</span>
+          <span class="cmd-badge badge-nav">cmd</span>
+          <span class="doc-arrow">▶</span>
+        </div>
+        <div class="doc-row-body">
+          <div class="doc-details-grid">
+            <div>
+              <div class="doc-detail-label">Использование</div>
+              <div class="doc-example"><span class="prompt">$</span><span class="cmd-text">exit</span></div>
+            </div>
+            <div>
+              <div class="doc-detail-label">Вывод</div>
+              <div class="doc-example">Пока!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-row" onclick="toggleRow(this)">
+        <div class="doc-row-header">
+          <code class="cmd-tag">help</code>
+          <span class="doc-short">Встроенная справка</span>
+          <span class="cmd-badge badge-nav">cmd</span>
+          <span class="doc-arrow">▶</span>
+        </div>
+        <div class="doc-row-body">
+          <div class="doc-details-grid">
+            <div>
+              <div class="doc-detail-label">Использование</div>
+              <div class="doc-example"><span class="prompt">$</span><span class="cmd-text">help</span></div>
+            </div>
+            <div>
+              <div class="doc-detail-label">Вывод</div>
+              <div class="doc-example">
+                Доступные команды:<br>
+                &nbsp;&nbsp;clear<br>
+                &nbsp;&nbsp;echo<br>
+                &nbsp;&nbsp;exit<br>
+                &nbsp;&nbsp;help<br>
+                &nbsp;&nbsp;ver
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-row" onclick="toggleRow(this)">
+        <div class="doc-row-header">
+          <code class="cmd-tag">ver</code>
+          <span class="doc-short">Вывод версии</span>
+          <span class="cmd-badge badge-nav">cmd</span>
+          <span class="doc-arrow">▶</span>
+        </div>
+        <div class="doc-row-body">
+          <div class="doc-details-grid">
+            <div>
+              <div class="doc-detail-label">Использование</div>
+              <div class="doc-example"><span class="prompt">$</span><span class="cmd-text">ver</span></div>
+            </div>
+            <div>
+              <div class="doc-detail-label">Вывод</div>
+              <div class="doc-example">BarsikCMD версия 2026.3.11.1</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </main>
+</div>
+
+<footer>
+  <div>
+    <span class="footer-logo">BarsikCMD</span>
+    <span style="margin-left:1rem">// сделано с 🐱 для Linux Mint</span>
+  </div>
+  <div>
+    <a href="https://github.com/barsik0396/BarsikCMD" target="_blank">github</a>
+    <span style="margin:0 0.75rem;color:var(--border2)">|</span>
+    <span style="color:var(--text3)">MIT License</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+function toggleRow(row) {
+  row.classList.toggle('open');
+}
+
+function scrollToCategory(id) {
+  const el = document.getElementById('cat-' + id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function filterCommands(query) {
+  const q = query.toLowerCase().trim();
+  const rows = document.querySelectorAll('.doc-row');
+  const categories = document.querySelectorAll('.cmd-category');
+  let anyVisible = false;
+
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    const match = !q || text.includes(q);
+    row.style.display = match ? '' : 'none';
+    if (match) anyVisible = true;
+  });
+
+  categories.forEach(cat => {
+    const visible = Array.from(cat.querySelectorAll('.doc-row')).some(r => r.style.display !== 'none');
+    cat.style.display = visible ? '' : 'none';
+  });
+
+  document.getElementById('no-results').style.display = anyVisible ? 'none' : 'block';
+}
+</script>
+</body>
+</html>
