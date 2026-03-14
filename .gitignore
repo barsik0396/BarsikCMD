@@ -6,6 +6,8 @@ media/documentation/node_modules/*
 media/documentation/dist/*
 # Папка ignore
 ignore
+# Папка со старыми файлами
+old
 # Файлы сборки
 code/linux/mint/build/barsik-cmd_2026.3.12.1_amd64/usr/local/bin/BarsikCMD_DOCS/*
 code/linux/mint/build/*.deb
