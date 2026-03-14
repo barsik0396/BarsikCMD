@@ -119,7 +119,30 @@ function resolvePath(input) {
 }
 
 function promptStr() {
-  return `<span class="t-prompt">BarsikCMD&gt;</span>`;
+  var ver = (typeof currentTryVersion !== 'undefined') ? currentTryVersion : '2026.3.2';
+  if (ver === '2026.3.1') return 'BarsikCMD&gt; ';
+  return '<span class="t-prompt" style="color:var(--yellow);font-weight:bold">BarsikCMD&gt;</span> ';
+}
+
+function rebuildChips() {
+  var ver = (typeof currentTryVersion !== 'undefined') ? currentTryVersion : '2026.3.2';
+  var hints = ver === '2026.3.1'
+    ? ['help', 'ver', 'echo Мяу!', 'clear', 'exit']
+    : ['help', 'ver', 'echo Мяу!', 'update', 'clear', 'exit'];
+  var chipWrap = document.getElementById('hint-chips');
+  if (!chipWrap) return;
+  chipWrap.innerHTML = '';
+  hints.forEach(function(cmd) {
+    var chip = document.createElement('span');
+    chip.className = 'hint-chip';
+    chip.innerHTML = '<span class="chip-prefix">$</span> ' + cmd;
+    chip.addEventListener('click', function() {
+      var input = document.getElementById('try-input');
+      input.value = cmd;
+      input.focus();
+    });
+    chipWrap.appendChild(chip);
+  });
 }
 
 // ─── Output helpers ───────────────────────────────────────────────────────────
@@ -384,9 +407,13 @@ const COMMANDS = {
 
   // ── exit ──
   'barsik.exit': () => {
+    const ver = (typeof currentTryVersion !== 'undefined') ? currentTryVersion : '2026.3.2';
+    if (ver === '2026.3.1') {
+      return [empty(), line('Пока!'), empty()].join('');
+    }
     return [
       empty(),
-      line('Пока!'),
+      line(`<span style="color:var(--red);font-weight:bold">Пока!</span>`),
       line(`<span style="color:var(--text3)">// В браузерной версии выход недоступен — попробуй настоящую: <a href="index.html#install" style="color:var(--cyan)">установить</a></span>`),
       empty(),
     ].join('');
@@ -394,23 +421,52 @@ const COMMANDS = {
 
   // ── ver ──
   'barsik.ver': () => {
-    return [
-      empty(),
-      line('BarsikCMD версия 2026.3.11.1'),
-      empty(),
-    ].join('');
+    // переопределяется в try.html
+    return [empty(), line('BarsikCMD версия 2026.3.2'), empty()].join('');
   },
 
   // ── help ──
   'barsik.help': () => {
+    const ver = (typeof currentTryVersion !== 'undefined') ? currentTryVersion : '2026.3.2';
+    if (ver === '2026.3.1') {
+      return [
+        empty(),
+        line('Доступные команды:'),
+        line('  clear'),
+        line('  echo'),
+        line('  exit'),
+        line('  help'),
+        line('  ver'),
+        empty(),
+      ].join('');
+    }
+    const sep = line(`<span style="color:var(--cyan)">─────────────────────────────────</span>`);
+    const cmds = [
+      ['clear',  'очистить экран'],
+      ['echo',   'вывести текст на экран'],
+      ['exit',   'выйти из BarsikCMD'],
+      ['help',   'показать список команд'],
+      ['update', 'проверить и установить обновления'],
+      ['ver',    'показать версию BarsikCMD'],
+    ];
+    const rows = cmds.map(([cmd, desc]) =>
+      line(`  <span style="color:var(--green);font-weight:bold">${cmd}</span> — ${desc}`)
+    ).join('');
     return [
       empty(),
-      line('Доступные команды:'),
-      line('  clear'),
-      line('  echo'),
-      line('  exit'),
-      line('  help'),
-      line('  ver'),
+      line(`<span style="color:var(--yellow);font-weight:bold">BarsikCMD — доступные команды:</span>`),
+      sep, rows, sep,
+      empty(),
+    ].join('');
+  },
+
+
+  // ── update ──
+  'update': () => {
+    return [
+      empty(),
+      line(`<span style="color:var(--cyan)">Проверка обновлений...</span>`),
+      line(`<span style="color:var(--green);font-weight:bold">Обновлений нет. У вас актуальная версия.</span>`),
       empty(),
     ].join('');
   },
@@ -420,7 +476,7 @@ const COMMANDS = {
 };
 
 // ─── Autocomplete ─────────────────────────────────────────────────────────────
-const ALL_CMDS = ['echo', 'exit', 'ver', 'help', 'clear'];
+const ALL_CMDS = ['echo', 'exit', 'ver', 'help', 'update', 'clear'];
 
 function autocomplete(input) {
   const parts = input.trim().split(/\s+/);
@@ -464,19 +520,32 @@ function execute(raw) {
     if (!sub) return COMMANDS['barsik.--help']([]);
     const fn = COMMANDS[`barsik.${sub}`];
     if (fn) return fn(args.slice(1));
-    return line(`Неизвестная команда: ${cmd} ${sub}. Введи 'help'`);
+    const _ver1 = (typeof currentTryVersion !== 'undefined') ? currentTryVersion : '2026.3.2';
+    return line(_ver1 !== '2026.3.1'
+      ? `<span style="color:var(--red)">Неизвестная команда: ${cmd} ${sub}. Введи 'help'.</span>`
+      : `Неизвестная команда: ${cmd} ${sub}. Введи 'help'.`);
   }
 
   if (cmd === 'echo') {
     return line(args.join(' '));
   }
 
-  if (cmd === 'exit') return COMMANDS['barsik.exit']([]);
-  if (cmd === 'ver')  return COMMANDS['barsik.ver']([]);
-  if (cmd === 'help') return COMMANDS['barsik.help']([]);
+  if (cmd === 'exit')   return COMMANDS['barsik.exit']([]);
+  if (cmd === 'ver')    return COMMANDS['barsik.ver']([]);
+  if (cmd === 'help')   return COMMANDS['barsik.help']([]);
+  if (cmd === 'update') {
+    const ver = (typeof currentTryVersion !== 'undefined') ? currentTryVersion : '2026.3.2';
+    if (ver === '2026.3.1') {
+      return line("Неизвестная команда: update. Введи 'help'.");
+    }
+    return COMMANDS['update']([]);
+  }
 
   // unknown top-level
-  return line(`Неизвестная команда: ${cmd}. Введи 'help'`);
+  const _ver2 = (typeof currentTryVersion !== 'undefined') ? currentTryVersion : '2026.3.2';
+  return line(_ver2 !== '2026.3.1'
+    ? `<span style="color:var(--red)">Неизвестная команда: ${cmd}. Введи 'help'.</span>`
+    : `Неизвестная команда: ${cmd}. Введи 'help'.`);
 }
 
 // ─── Terminal UI ──────────────────────────────────────────────────────────────
@@ -623,10 +692,44 @@ function initTerminal() {
   });
 
   // startup greeting
-  appendOutput([
-    `<div style="padding:2px 0">BarsikCMD v2026.3.11.1 — введи 'help' для списка команд</div>`,
-    `<div style="height:0.35rem"></div>`,
-  ].join(''));
+  setTimeout(function() {
+    var ver = (typeof currentTryVersion !== 'undefined') ? currentTryVersion : '2026.3.2';
+    var greet = (typeof TRY_GREET !== 'undefined') ? TRY_GREET[ver] : "BarsikCMD v2026.3.2 — введи 'help' для списка команд";
+    var out = document.getElementById('try-output');
+    out.innerHTML = '<div style="height:0.5rem"></div>';
+    var div = document.createElement('div');
+    if (ver === '2026.3.1') {
+      div.innerHTML = '<div style="padding:2px 0">' + greet + '</div><div style="height:0.35rem"></div>';
+    } else {
+      div.innerHTML = '<div style="color:var(--yellow);font-weight:bold;padding:2px 0">' + greet + '</div><div style="height:0.35rem"></div>';
+    }
+    out.appendChild(div);
+    rebuildChips();
+    // also define showGreeting for resetTerminal
+    window.showGreeting = function() {
+      rebuildChips();
+      var v = (typeof currentTryVersion !== 'undefined') ? currentTryVersion : '2026.3.2';
+      var g = (typeof TRY_GREET !== 'undefined') ? TRY_GREET[v] : "BarsikCMD v2026.3.2 — введи 'help' для списка команд";
+      var o = document.getElementById('try-output');
+      o.innerHTML = '<div style="height:0.5rem"></div>';
+      var d = document.createElement('div');
+      if (v === '2026.3.1') {
+        d.innerHTML = '<div style="padding:2px 0">' + g + '</div><div style="height:0.35rem"></div>';
+      } else {
+        d.innerHTML = '<div style="color:var(--yellow);font-weight:bold;padding:2px 0">' + g + '</div><div style="height:0.35rem"></div>';
+      }
+      o.appendChild(d);
+    };
+    // patch ver command
+    COMMANDS['barsik.ver'] = function() {
+      var v = (typeof currentTryVersion !== 'undefined') ? currentTryVersion : '2026.3.2';
+      var verStr = (typeof TRY_VERSIONS !== 'undefined') ? TRY_VERSIONS[v] : 'BarsikCMD версия 2026.3.2';
+      if (v === '2026.3.1') {
+        return '<div style="height:0.35rem"></div><div class="t-out-line">' + verStr + '</div><div style="height:0.35rem"></div>';
+      }
+      return '<div style="height:0.35rem"></div><div class="t-out-line"><span style="color:var(--cyan);font-weight:bold">' + verStr + '</span></div><div style="height:0.35rem"></div>';
+    };
+  }, 0);
 
   updatePrompt();
   updateCounter();
