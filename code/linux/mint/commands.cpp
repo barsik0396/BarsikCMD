@@ -63,7 +63,7 @@ void cmd_clear(const std::vector<std::string>& args) {
 
 void cmd_ver(const std::vector<std::string>& args) {
     (void)args;
-    std::cout << CYAN << BOLD << "BarsikCMD версия 2026.3.2" << RESET << "\n";
+    std::cout << CYAN << BOLD << "BarsikCMD версия 2026.3.3" << RESET << "\n";
 }
 
 void cmd_exit(const std::vector<std::string>& args) {
@@ -160,8 +160,8 @@ static int jsonGetInt(const std::string& json, const std::string& key) {
 
 // ─── Команда update ────────────────────────────────────────────────────────
 
-static const std::string CURRENT_VERSION = "2026.3.11";
-static const int CURRENT_VERSION_ID = 2; // третий компонент версии (релиз за день)
+static const std::string CURRENT_VERSION = "2026.3.3";
+static const int CURRENT_VERSION_ID = 3; // третий компонент версии (релиз за день)
 static const std::string UPDATE_CHANNEL = "preview";
 static const std::string UPDATES_URL =
     "https://raw.githubusercontent.com/barsik0396/BarsikCMD/refs/heads/main/server/updates.json";
