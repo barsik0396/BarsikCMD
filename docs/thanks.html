@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Спасибо — BarsikCMD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Fira+Code:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ─── BANNERS ─── */
+  .banners {
+    padding-top: 56px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .banner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 2rem;
+    font-size: 0.82rem;
+    font-family: 'Fira Code', monospace;
+    border-bottom: 1px solid transparent;
+  }
+
+  .banner-warn {
+    background: rgba(240, 192, 96, 0.08);
+    border-bottom-color: rgba(240, 192, 96, 0.2);
+    color: var(--yellow);
+  }
+
+  .banner-info {
+    background: rgba(86, 212, 247, 0.08);
+    border-bottom-color: rgba(86, 212, 247, 0.2);
+    color: var(--cyan);
+  }
+
+  .banner-icon { flex-shrink: 0; font-size: 0.9rem; }
+  .banner-text { flex: 1; }
+
+  .banner-btn {
+    background: transparent;
+    border: 1px solid currentColor;
+    color: inherit;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    padding: 3px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    opacity: 0.85;
+  }
+  .banner-btn:hover { opacity: 1; background: rgba(255,255,255,0.06); }
+
+  /* ─── MAIN CONTENT ─── */
+  .thanks-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .thanks-page::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 40%, rgba(57,211,83,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .thanks-cat {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .thanks-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+  .thanks-title span { color: var(--green2); }
+
+  .thanks-version {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    color: var(--text3);
+    margin-bottom: 2rem;
+  }
+  .thanks-version span { color: var(--green); }
+
+  .thanks-sub {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.88rem;
+    color: var(--text2);
+    line-height: 1.9;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+  .thanks-sub .comment { color: var(--muted); }
+
+  .thanks-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .thanks-terminal {
+    margin-top: 3rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.75rem;
+    font-size: 0.82rem;
+    color: var(--text2);
+    font-family: 'JetBrains Mono', monospace;
+    text-align: left;
+    max-width: 420px;
+    width: 100%;
+  }
+  .thanks-terminal .t-prompt { color: var(--yellow); font-weight: bold; }
+  .thanks-terminal .t-cmd { color: var(--text); }
+  .thanks-terminal .t-out { color: var(--green); margin-left: 0; }
+  .thanks-terminal .t-line { margin: 3px 0; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="prompt">~$</span>
+    BarsikCMD
+    <span class="cursor"></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#features">возможности</a></li>
+    <li><a href="index.html#install">установка</a></li>
+    <li><a href="docs.html">документация</a></li>
+    <li><a href="try.html">попробовать</a></li>
+    <li><a href="https://github.com/barsik0396/BarsikCMD" target="_blank">github</a></li>
+  </ul>
+</nav>
+
+<!-- Баннеры — заполняются скриптом -->
+<div class="banners" id="banners"></div>
+
+<div class="thanks-page">
+  <div class="thanks-cat">🐱</div>
+  <h1 class="thanks-title">Спасибо за установку <span>BarsikCMD</span>!</h1>
+  <div class="thanks-version" id="version-line">
+    <!-- заполняется скриптом -->
+  </div>
+  <p class="thanks-sub">
+    BarsikCMD установлен и готов к работе.<br>
+    <span class="comment"># введи 'help' чтобы начать</span>
+  </p>
+  <div class="thanks-actions">
+    <a href="docs.html" class="btn btn-primary">документация</a>
+    <a href="try.html" class="btn btn-secondary">playground</a>
+  </div>
+
+  <div class="thanks-terminal">
+    <div class="t-line"><span class="t-prompt">BarsikCMD&gt;</span> <span class="t-cmd">ver</span></div>
+    <div class="t-line t-out" id="terminal-ver"><!-- заполняется скриптом --></div>
+    <div class="t-line" style="margin-top:8px"><span class="t-prompt">BarsikCMD&gt;</span> <span class="t-cmd">help</span></div>
+    <div class="t-line" style="color:var(--text2)">Доступные команды: clear, echo, exit, help, update, ver</div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var version = params.get('version') || '';
+  var LATEST = '2026.3.3';
+
+  // version line
+  var versionLine = document.getElementById('version-line');
+  versionLine.innerHTML = version
+    ? 'установлена версия <span>' + version + '</span>'
+    : 'версия не указана';
+
+  // terminal ver output
+  document.getElementById('terminal-ver').textContent = version
+    ? 'BarsikCMD версия ' + version
+    : 'BarsikCMD версия ' + LATEST;
+
+  // banners
+  var bannersEl = document.getElementById('banners');
+  var html = '';
+
+  // 1. Версия устарела — 2026.3.1
+  if (version === '2026.3.1') {
+    html += banner('warn', '⚠', 'Эта версия скоро не будет поддерживаться.', 'Обновить!');
+  }
+
+  // 2. Сломан update — 2026.3.2
+  if (version === '2026.3.2') {
+    html += banner('warn', '⚠', 'В этой версии был сломан update. Обновитесь на последнюю версию, чтобы убрать проблему.', 'Обновить!');
+  }
+
+  // 3. Доступна новая версия — не последняя
+  if (version && version !== LATEST) {
+    html += banner('info', 'ℹ', 'Доступна новая версия ' + LATEST + '.', 'Обновить!');
+  }
+
+  bannersEl.innerHTML = html;
+
+  function banner(type, icon, text, btnText) {
+    return '<div class="banner banner-' + type + '">'
+      + '<span class="banner-icon">' + icon + '</span>'
+      + '<span class="banner-text">' + text + '</span>'
+      + (btnText ? '<button class="banner-btn" onclick="void(0)">' + btnText + '</button>' : '')
+      + '</div>';
+  }
+})();
+</script>
+</body>
+</html>
