@@ -9,6 +9,10 @@ public:
     Shell();
     void run(int argc, char* argv[]);
 
+    // Для команды reload
+    static int  s_argc;
+    static char** s_argv;
+
 private:
     std::string prompt;
     std::vector<std::string> history;
