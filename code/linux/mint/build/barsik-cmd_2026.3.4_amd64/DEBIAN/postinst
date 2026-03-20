@@ -1,0 +1,13 @@
+#!/bin/bash
+echo ""
+echo " /\_/\ "
+echo "( o.o )"
+echo " > ^ <"
+echo ""
+echo "BarsikCMD 2026.3.4"
+echo "Установлен успешно!"
+echo "Удачи с использованием!"
+echo ""
+echo "https://barsik0396.github.io/BarsikCMD/thanks?version=2026.3.4"
+echo "Запустить BarsikCMD: barsikcmd"
+echo "Запустить документацию: barsikcmd-docs"

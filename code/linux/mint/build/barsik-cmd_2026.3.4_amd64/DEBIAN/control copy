@@ -1,0 +1,12 @@
+Package: barsikcmd
+Version: 2026.3.4
+Architecture: amd64
+Maintainer: barsik0396 <Barsik0396@outlook.com>
+Description: BarsikCMD - командная строка Барсика
+ BarsikCMD это кастомная командная строка, которую создал Барсик. Этот проект полностью open-source, и доступен на GitHub (https://github.com/barsik0396/BarsikCMD). У BarsikCMD есть несколько команд: clear (очистка экрана), echo <текст> (вывод текста), exit (выход), help (список команд), update (обновить), meow (кот), reload (перезагрузить BarsikCMD), info (информация) и ver (вывод версии). Удачи с использованием!
+
+Installed-Size: 246
+Recommends: libcurl4-openssl-dev
+Suggests: 
+Conflicts: 
+Homepage: https://
