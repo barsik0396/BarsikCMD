@@ -1,128 +1,93 @@
 # BarsikCMD — Командная строка Барсика 😼
+
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Platform](https://img.shields.io/badge/platform-Linux-blue)
-![Version](https://img.shields.io/badge/version-2026.3.3-orange)
+![Version](https://img.shields.io/badge/version-2026.3.4-orange)
 ![Status](https://img.shields.io/badge/status-active-success)
 ![Open Source](https://img.shields.io/badge/open--source-yes-brightgreen)
 
-
-**BarsikCMD** — это лёгкая, быстрая и полностью **open‑source** командная строка, созданная как альтернатива стандартным терминалам.  
-Проект открыт на 100%: **вы можете изменять код, добавлять фичи и делать форки — лицензия это разрешает.**
-
----
-
-# ❓ Почему именно BarsikCMD?
-
-## 1. 🚀 Быстрота
-BarsikCMD запускается мгновенно, работает без задержек и обновляется очень быстро.
-
-## 2. ✅ Простота
-Никаких сложных настроек:
-- не нужно указывать сервер обновлений,
-- установка занимает пару секунд,
-- документация понятная,
-- команды интуитивные.
-
-## 3. 👀 Приватность
-BarsikCMD **не собирает данные**:
-- нет телеметрии,
-- нет сохранения истории команд,
-- подключение к серверу происходит только для загрузки обновлений и DEB‑пакетов.
-
-## 4. 📂 Открытость
-Исходники доступны полностью.  
-Код лежит в папке `code`, и каждый может посмотреть, как всё работает внутри.
+**BarsikCMD** — лёгкая, быстрая и полностью open-source командная строка для Linux, созданная как альтернатива стандартным терминалам.  
+Код открыт полностью: можно смотреть, изменять, форкать — лицензия это разрешает.
 
 ---
 
-# 🆕 Последние релизы
+## ❓ Почему BarsikCMD?
 
-| Название       | Версия   | Что нового                                   | Поддерживается | GitHub Releases | Скачать DEB |
-|----------------|----------|-----------------------------------------------|----------------|-----------------|-------------|
-| Update fix     | 2026.3.3 | Исправлено поведение команды `update`         | ✅             | [тут](https://github.com/barsik0396/BarsikCMD/releases/tag/2026.3.3) | [тут](https://github.com/barsik0396/BarsikCMD/releases/download/2026.3.3/barsik-cmd_2026.3.3_amd64.deb) |
-| First update   | 2026.3.2 | Добавлена команда `update` и цветной вывод    | ✅             | [тут](https://github.com/barsik0396/BarsikCMD/releases/tag/2026.3.2) | [тут](https://github.com/barsik0396/BarsikCMD/releases/download/2026.3.2/barsik-cmd_2026.3.2_amd64.deb) |
-| First release  | 2026.3.1 | Первый релиз                                  | ⚠️             | [тут](https://github.com/barsik0396/BarsikCMD/releases/tag/2026.3.1) | [тут](https://github.com/barsik0396/BarsikCMD/releases/download/2026.3.1/barsik-cmd_2026.3.1_amd64.deb) |
+**Быстрота** — запускается мгновенно, работает без задержек, обновляется часто.
+
+**Простота** — никаких сложных настроек. Установка занимает несколько секунд, команды интуитивные.
+
+**Приватность** — BarsikCMD не собирает данные: нет телеметрии, нет истории команд. Сеть используется только для загрузки обновлений по явной команде.
+
+**Открытость** — исходники доступны полностью в папке `code`.
 
 ---
 
-# 🚀 Быстрый старт
+## 🚀 Быстрый старт
 
-1. Скачайте последний релиз:  
-   **DEB 2026.3.3** → https://github.com/barsik0396/BarsikCMD/releases/tag/2026.3.3  
-2. Установите пакет.
-3. Запустите команду:  
-   ```
+1. Скачайте последний релиз: [Releases](https://github.com/Barsik0396/BarsikCMD/releases)
+2. Установите `.deb` пакет.
+3. Запустите:
+   ```bash
    barsikcmd
    ```
-4. Готово — BarsikCMD работает!
+
+Подробная инструкция по установке: [INSTALL.md](INSTALL.md)
 
 ---
 
-# ◼️ Основные команды
+## ◼️ Команды
 
 > Формат: `команда [необязательный] <обязательный>`
 
-| Команда | Использование       | Описание |
-|---------|----------------------|----------|
-| `clear` | `clear`              | Очистить экран |
-| `echo`  | `echo [текст]`       | Вывести текст |
-| `exit`  | `exit`               | Выйти из BarsikCMD |
-| `help`  | `help`               | Список команд |
-| `update`| `update`             | Обновить BarsikCMD |
-| `ver`   | `ver`                | Показать версию |
+| Команда  | Использование  | Описание                  |
+|----------|----------------|---------------------------|
+| `clear`  | `clear`        | Очистить экран            |
+| `echo`   | `echo [текст]` | Вывести текст             |
+| `exit`   | `exit`         | Выйти из BarsikCMD        |
+| `help`   | `help`         | Список команд             |
+| `update` | `update`       | Обновить BarsikCMD        |
+| `ver`    | `ver`          | Показать версию           |
 
 ---
 
-# ❌ Типичные ошибки и решения
+## 🆕 Последние релизы
 
-## Ошибка: «Более поздняя версия уже установлена»
-Это значит, что у вас стоит более новая версия.
-
-**Решение:**
-```bash
-sudo apt remove barsikcmd
-```
-
-## Ошибка: «curl вернул ошибку» при `update`
-**Решения:**
-1. Не нажимайте CTRL+C во время обновления.  
-2. Проверьте интернет‑соединение.
+| Версия   | Название      | Что нового                                | Статус | Скачать |
+|----------|---------------|-------------------------------------------|--------|---------|
+| 2026.3.4 | Big update    | Новые команды, аргументы, фиксы           | ✅     | [DEB](https://github.com/barsik0396/BarsikCMD/releases/download/2026.3.4/barsik-cmd_2026.3.4_amd64.deb) · [Release](https://github.com/barsik0396/BarsikCMD/releases/tag/2026.3.4) |
+| 2026.3.3 | Update fix    | Исправлено поведение команды `update`     | ✅     | [DEB](https://github.com/barsik0396/BarsikCMD/releases/download/2026.3.3/barsik-cmd_2026.3.3_amd64.deb) · [Release](https://github.com/barsik0396/BarsikCMD/releases/tag/2026.3.3) |
+| 2026.3.2 | First update  | Команда `update` и цветной вывод          | ⚠️     | [DEB](https://github.com/barsik0396/BarsikCMD/releases/download/2026.3.2/barsik-cmd_2026.3.2_amd64.deb) · [Release](https://github.com/barsik0396/BarsikCMD/releases/tag/2026.3.2) |
+| 2026.3.1 | First release | Первый релиз                              | ❌     | [DEB](https://github.com/barsik0396/BarsikCMD/releases/download/2026.3.1/barsik-cmd_2026.3.1_amd64.deb) · [Release](https://github.com/barsik0396/BarsikCMD/releases/tag/2026.3.1) |
 
 ---
 
-# ❔ FAQ
+## ❔ FAQ
 
 <details>
-<summary>Почему BarsikCMD только для Linux?</summary>
+<summary>Почему только Linux?</summary>
 
-BarsikCMD разрабатывается под Linux, потому что автор проекта перешёл на Linux и не планирует создавать Windows‑версию.
+BarsikCMD разрабатывается на Linux Mint для Linux. Windows-версия не планируется.
 </details>
 
 <details>
 <summary>Есть ли документация?</summary>
 
-Да! Документация находится здесь:  
-https://github.com/barsik0396/BarsikCMD/wiki
+Да: [Wiki](https://github.com/barsik0396/BarsikCMD/wiki)
 </details>
 
 <details>
-<summary>Когда появится язык автоматизации BarsikCMD?</summary>
+<summary>Когда появится язык автоматизации?</summary>
 
 Планируется в версиях **2026.3.5 — 2026.4.0**.  
 Расширение для VS Code — примерно **2026.5.4 — 2026.6.1**.
 </details>
 
-<details>
-<summary>Почему BarsikCMD не популярен?</summary>
-
-Основные причины:
-1. Небольшое количество команд.  
-2. Трудоёмкая реализация функции «Try BarsikCMD» на сайте (занимает от 30 минут до 3 дней).
-</details>
-
 ---
 
-# 🐾 Дополнительно
-История создания проекта: **Creating.md**  
-Исходники: `/code`  
-Лицензия: свободная, разрешает модификации и форки.
+## 📄 Дополнительно
+
+- [История создания](Creating.md)
+- [Философия проекта](Philosophy.md)
+- [Changelog](CHANGELOG.md)
+- Исходники: `/code`
