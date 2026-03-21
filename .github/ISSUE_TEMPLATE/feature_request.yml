@@ -1,0 +1,32 @@
+name: 💡 Feature request
+description: Предложить идею или новую функцию
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Перед созданием Issue проверьте, нет ли уже похожей темы.
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: Идея
+      description: Что вы хотите добавить или изменить?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: Зачем это нужно?
+      description: Как это улучшит BarsikCMD?
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Дополнительно
+      description: Примеры, ссылки, прочие детали.
+    validations:
+      required: false

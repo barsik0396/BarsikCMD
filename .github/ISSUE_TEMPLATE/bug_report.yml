@@ -1,0 +1,51 @@
+name: 🐛 Bug report
+description: Сообщить об ошибке в BarsikCMD
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Перед созданием Issue проверьте, нет ли уже похожей темы.
+
+  - type: input
+    id: version
+    attributes:
+      label: Версия BarsikCMD
+      placeholder: "например: 2026.3.3"
+    validations:
+      required: true
+
+  - type: input
+    id: system
+    attributes:
+      label: Система
+      placeholder: "например: Linux Mint 22.3"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Описание проблемы
+      description: Что происходит? Чего вы ожидали?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Шаги для воспроизведения
+      placeholder: |
+        1. Запустить barsikcmd
+        2. Ввести команду ...
+        3. Увидеть ошибку ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Дополнительно
+      description: Скриншоты, логи, любая другая полезная информация.
+    validations:
+      required: false
