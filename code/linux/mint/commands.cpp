@@ -21,6 +21,7 @@ static const std::map<std::string, std::string> CMD_DESCRIPTIONS = {
     { "meow",   "показать котика" },
     { "info",   "информация о проекте. Аргументы: links" },
     { "reload", "перезапустить BarsikCMD" },
+    { "file",   "работа с файлами. Аргументы: new, del, set, edit, move" },
 };
 
 void cmd_help(const std::map<std::string, std::function<void(const std::vector<std::string>&)>>& commands,
@@ -53,7 +54,7 @@ void cmd_clear(const std::vector<std::string>& args) {
 
 void cmd_ver(const std::vector<std::string>& args) {
     (void)args;
-    std::cout << CYAN << BOLD << "BarsikCMD версия 2026.3.4" << RESET << "\n";
+    std::cout << CYAN << BOLD << "BarsikCMD версия 2026.3.5" << RESET << "\n";
 }
 
 void cmd_exit(const std::vector<std::string>& args) {
