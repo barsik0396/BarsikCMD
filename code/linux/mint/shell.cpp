@@ -2,6 +2,7 @@
 #include "commands.h"
 #include "commands/update.h"
 #include "commands/colors.h"
+#include "input.h"
 #include <iostream>
 #include <sstream>
 #include <ctime>
@@ -9,14 +10,13 @@
 #include <unistd.h>
 #include <csignal>
 
-static volatile sig_atomic_t g_sigint_received = 0;
-
 int   Shell::s_argc = 0;
 char** Shell::s_argv = nullptr;
 
 Shell::Shell() {
     prompt = "\033[1m\033[33mBarsikCMD>\033[0m ";
     srand(static_cast<unsigned>(time(nullptr)));
+    input_init();
     registerCommands();
 }
 
@@ -30,6 +30,7 @@ void Shell::registerCommands() {
     commands["meow"]    = [](const std::vector<std::string>& args)     { cmd_meow(args); };
     commands["info"]    = [](const std::vector<std::string>& args)     { cmd_info(args); };
     commands["reload"]  = [](const std::vector<std::string>& args)     { cmd_reload(args); };
+    commands["file"]    = [](const std::vector<std::string>& args)     { cmd_file(args); };
 }
 
 // Проверяет содержит ли строка ANSI escape-последовательности
@@ -107,7 +108,7 @@ void Shell::run(int argc, char* argv[]) {
     }
 
     // ── Приветствие ───────────────────────────────────────────────────────
-    std::cout << "\033[1m\033[33mBarsikCMD v2026.3.4\033[0m — введи 'help' для списка команд\n\n";
+    std::cout << "\033[1m\033[33mBarsikCMD v2026.3.5\033[0m — введи 'help' для списка команд\n\n";
 
     // ── Проверка обновлений при запуске ───────────────────────────────────
     if (!flags.count("-disable-version-check-on-init")) {
@@ -124,13 +125,6 @@ void Shell::run(int argc, char* argv[]) {
 
     // ── Основной цикл ─────────────────────────────────────────────────────
 
-    // Ctrl+C (SIGINT) — без SA_RESTART чтобы getline прерывался
-    struct sigaction sa_int {};
-    sa_int.sa_handler = [](int) { g_sigint_received = 1; };
-    sigemptyset(&sa_int.sa_mask);
-    sa_int.sa_flags = 0; // НЕ SA_RESTART
-    sigaction(SIGINT, &sa_int, nullptr);
-
     // Ctrl+\ (SIGQUIT) — игнорировать
     struct sigaction sa_quit {};
     sa_quit.sa_handler = SIG_IGN;
@@ -140,22 +134,7 @@ void Shell::run(int argc, char* argv[]) {
 
     std::string input;
     while (true) {
-        std::cout << prompt << std::flush;
-
-        while (!std::getline(std::cin, input)) {
-            if (g_sigint_received) {
-                g_sigint_received = 0;
-                std::cin.clear();
-                std::cout << "\n" YELLOW "Для выхода введи 'exit' или нажми Ctrl+D." RESET "\n";
-                std::cout << prompt << std::flush;
-                continue;
-            }
-            if (std::cin.eof()) {
-                std::cout << "\n" RED BOLD "Пока!" RESET "\n";
-                return;
-            }
-            std::cin.clear();
-        }
+        if (!input_readline(prompt, input)) break;
 
         if (input.empty()) continue;
 
@@ -164,6 +143,7 @@ void Shell::run(int argc, char* argv[]) {
             continue;
         }
 
+        input_add_history(input);
         history.push_back(input);
         execute(input);
     }
