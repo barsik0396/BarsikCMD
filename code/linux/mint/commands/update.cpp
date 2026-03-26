@@ -88,8 +88,8 @@ static int jsonGetInt(const std::string& json, const std::string& key) {
 
 // ─── Команда update ────────────────────────────────────────────────────────
 
-static const std::string CURRENT_VERSION = "2026.3.4";
-static const int CURRENT_VERSION_ID = 4;
+static const std::string CURRENT_VERSION = "2026.3.5";
+static const int CURRENT_VERSION_ID = 5;
 static const std::string UPDATE_CHANNEL = "preview";
 static const std::string UPDATES_URL =
     "https://raw.githubusercontent.com/barsik0396/BarsikCMD/refs/heads/main/server/updates.json";
