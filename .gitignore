@@ -13,6 +13,15 @@ ignore/
 test/
 builder/
 old/
+BarsikCMD-OS/
+netlify/
+examples/
+models/
+temp/
+*.iso
+
+# Артефакты расширения
+extension/*.vsix
 
 # Java-архивы (для совместимости с BFG)
 *.jar
