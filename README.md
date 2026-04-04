@@ -8,6 +8,12 @@
 ![Open Source](https://img.shields.io/badge/open--source-yes-brightgreen)
 
 **BarsikCMD** — лёгкая, быстрая и полностью open-source командная строка для Linux, созданная как альтернатива стандартным терминалам.  
+> [!NOTE]
+> Все силы разработки BarsikCMD были переданы на разработку [BarsikCMD-barsik](https://github.com/BarsikCMD/BarsikCMD-barsik).
+>
+> Обновления BarsikCMD будут очень редко.
+
+
 Код открыт полностью: можно смотреть, изменять, форкать — лицензия это разрешает.
 
 ---
